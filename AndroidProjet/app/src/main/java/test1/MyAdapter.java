@@ -24,7 +24,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         data1=s1;
         data2=s2;
         images=img;
-
     }
 
     @NonNull

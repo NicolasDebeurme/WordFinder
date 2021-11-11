@@ -16,6 +16,10 @@
 
     <string name="loading_name">Word Finder</string>
 
+    <string name="results_toptext_definitions">Definitions</string>
+    <string name="results_toptext_synonyms">Synonyms</string>
+    <string name="researched_word_input">text</string>
+
     <string-array name="programming_language">
         <item>premier</item>
         <item>premier</item>

@@ -20,8 +20,6 @@ public class DictionaryAPI {
     }
 
 
-
-
     public class Phonetics {
         String text;
         String audio;

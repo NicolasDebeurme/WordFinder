@@ -14,9 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DictionaryAsync extends AsyncTask<String, Void, List<DictionaryAPI>> {
 
     final String parameter;
+    private DefChangeListener mListener;
 
-    public DictionaryAsync(String parameter) { // constructeur vide car on a pas de paramètre ici
+
+    public DictionaryAsync(String parameter, DefChangeListener mListener ) { // constructeur vide car on a pas de paramètre ici
         this.parameter = parameter;
+        this.mListener= mListener;
     }
 
     @Override
@@ -42,10 +45,14 @@ public class DictionaryAsync extends AsyncTask<String, Void, List<DictionaryAPI>
 
     @Override
     protected void onPostExecute(List<DictionaryAPI> liste) {
-        if(liste!=null){ // si on a bien reçu quelque chose
-            for(DictionaryAPI el : liste){ // on parcours les résultats
-                Log.d("resultat api", el.toString());  // et on les affiches
-            }
+        if(liste!=null && mListener != null){ // si on a bien reçu quelque chose
+
+            /*for(DictionaryAPI el : liste){ // on parcours les résultats
+
+                Log.d("resultat api", el.meanings.get(1).definitions.get(0).definition);  // et on les affiches
+
+            }*/
+            mListener.OnDefRetrieved(liste);
         }
         super.onPostExecute(liste);
     }

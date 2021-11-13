@@ -20,6 +20,9 @@
     <string name="results_toptext_synonyms">Synonyms</string>
     <string name="researched_word_input">text</string>
 
+    <string name="register_Title">Register Account</string>
+    <string name="register_Error">Invalid Credentials</string>
+
     <string-array name="programming_language">
         <item>premier</item>
         <item>premier</item>

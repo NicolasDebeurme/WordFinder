@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidprojet">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProjet">
+        <activity
+            android:name=".ui.login.SynonymActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.HomeActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -19,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.login.RegisterActivity_" />
     </application>
 
 </manifest>

@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidprojet.databinding.ActivityLoginBinding;
@@ -37,8 +39,9 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
+        final Button loginButton = binding.SignInButton;
         final Button Register = binding.Register;
+
 
 
         loginButton.setOnClickListener(v ->
@@ -47,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         );
 
+        assert Register != null;
         Register.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity_.class);
             startActivity(intent);
@@ -56,15 +60,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0)
-                    loginButton.setEnabled(true);
-                else
-                    loginButton.setEnabled(false);
+                loginButton.setEnabled(0 != s.length());
             }
         });
 
@@ -84,11 +87,14 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(FirebaseUser user) {
 
         if (user != null) {
-            startActivity(new Intent(LoginActivity.this, RegisterActivity_.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         }
     }
 
     public void SignIn(String email, String password) {
+
+        final TextView Errormessage = binding.LoginErrorFeedback;
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     private static final String TAG = "Login";
@@ -105,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            Errormessage.setVisibility(View.VISIBLE);
                             updateUiWithUser(null);
                         }
 

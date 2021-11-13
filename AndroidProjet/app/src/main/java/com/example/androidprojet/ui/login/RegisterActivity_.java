@@ -3,8 +3,10 @@ package com.example.androidprojet.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,20 +28,27 @@ public class RegisterActivity_ extends LoginActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
 
-        com.example.androidprojet.databinding.ActivityRegisterBinding binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        ActivityRegisterBinding binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        final EditText email = binding.username;
-        final EditText password = binding.password;
-        final Button loginButton = binding.login;
+        final EditText email = binding.EmailEditText;
+        final EditText password = binding.PasswordEditText;
+        final Button RegisterButton = binding.register;
+        final TextView ErrorMessage = binding.ErrorMessage;
 
 
-        loginButton.setOnClickListener(v ->
-
-                Register(email.getText().toString(), password.getText().toString())
+        RegisterButton.setOnClickListener(v -> {
+                    if (!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
+                        Register(email.getText().toString(), password.getText().toString());
+                    }
+                    else
+                    {
+                        Toast.makeText(RegisterActivity_.this, "Login ou Mot De Passe incorrect",
+                                Toast.LENGTH_SHORT).show();
+                        ErrorMessage.setVisibility(View.VISIBLE);
+                    }
+                }
         );
-
-
     }
 
     private void updateUiWithUser(FirebaseUser user) {

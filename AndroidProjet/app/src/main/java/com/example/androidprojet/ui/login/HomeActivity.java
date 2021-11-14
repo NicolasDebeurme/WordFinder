@@ -2,6 +2,8 @@ package com.example.androidprojet.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,15 +11,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.androidprojet.R;
 import com.example.androidprojet.databinding.ActivityHomeDefinitionBinding;
 import com.example.androidprojet.databinding.ActivitySynonymBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView Output;
-    String Defs = "";
+
+    List<String> Defs= new ArrayList<>();
+    List<String> Syns = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +33,46 @@ public class HomeActivity extends AppCompatActivity {
 
         final EditText wordDefinition = definitionBinding.InputTextSearchBar;
         final EditText wordSynonym = synonymBinding.InputTextSearchBar;
-        final Button EnterButton = definitionBinding.EnterButton;
+        final Button EnterButtonDef = definitionBinding.EnterButtonDef;
+        final Button EnterButtonSyn =synonymBinding.EnterButtonSyn;
         final ConstraintLayout Synonyms = definitionBinding.SynonymsLinkTab;
         final ConstraintLayout Definitions = synonymBinding.DefinitionsLinkTab;
-        Output = definitionBinding.Output;
+        final RecyclerView OutputDef = definitionBinding.DefRecycler;
+        final RecyclerView OutputSyn = synonymBinding.SynRecycler;
         setContentView(definitionBinding.getRoot());
 
-        EnterButton.setOnClickListener(v -> {
+
+
+        EnterButtonDef.setOnClickListener(v -> {
+            Defs= new ArrayList<>();
+            Syns= new ArrayList<>();
+
             DictionaryAsync m=new DictionaryAsync(wordDefinition.getText().toString(),this::OnDefRetrieved);
             m.execute();
+
+            RecyclerDefinitions(OutputDef);
         });
+
+        EnterButtonSyn.setOnClickListener(v -> {
+            Defs= new ArrayList<>();
+            Syns= new ArrayList<>();
+
+            DictionaryAsync m=new DictionaryAsync(wordDefinition.getText().toString(),this::OnDefRetrieved);
+            m.execute();
+
+            RecyclerSynonyms(OutputSyn);
+        });
+
         Synonyms.setOnClickListener(v->{
+            RecyclerSynonyms(OutputSyn);
 
             wordSynonym.setText(wordDefinition.getText()) ;
             setContentView(synonymBinding.getRoot());
 
         });
         Definitions.setOnClickListener(v->{
+            RecyclerDefinitions(OutputDef);
+
             wordDefinition.setText(wordSynonym.getText());
             setContentView(definitionBinding.getRoot());
         });
@@ -56,15 +84,30 @@ public class HomeActivity extends AppCompatActivity {
         if(List!=null){ // si on a bien reçu quelque chose
 
             for(DictionaryAPI el : List){ // on parcours les résultats
-                for (DictionaryAPI.Definitions i : el.meanings.get(0).definitions)
+                for (DictionaryAPI.Meanings f : el.meanings)
                 {
-                    Defs = Defs  +i.definition+ "\n";
-
+                    for (DictionaryAPI.Definitions i : f.definitions)
+                    {
+                        Defs.add( " ("+f.partOfSpeech+") "+ i.definition+ "\n");
+                        for(String j : i.synonyms)
+                            Syns.add(j+ "\n");
+                    }
                 }
-                Output.setText(Defs);
-                Log.d("resultat api", el.meanings.get(0).definitions.get(0).definition);  // et on les affiches
 
             }
         }
+    }
+
+    private void RecyclerSynonyms(RecyclerView SynRec)
+    {
+        MyAdapter myAdapter = new MyAdapter(this, Syns);
+        SynRec.setAdapter(myAdapter);
+        SynRec.setLayoutManager(new LinearLayoutManager(this));
+    }
+    private void RecyclerDefinitions(RecyclerView DefRec)
+    {
+        MyAdapter myAdapter = new MyAdapter(this, Defs);
+        DefRec.setAdapter(myAdapter);
+        DefRec.setLayoutManager(new LinearLayoutManager(this));
     }
 }

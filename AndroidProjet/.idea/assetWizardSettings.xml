@@ -62,17 +62,6 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
-                                      <entry key="backgroundImage">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="imagePath" value="C:\Users\33680\Documents\M1-S1-ISEN\Android_courses\AndroidProjet-ComeSerlooten_branch\AndroidProjet\app\src\main\res\mipmap-xxxhdpi\ic_launchericon.png" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
                                       <entry key="foregroundClipArt">
                                         <value>
                                           <PersistentState>
@@ -91,6 +80,7 @@
                                               <map>
                                                 <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="C:\Users\33680\Documents\M1-S1-ISEN\Android_courses\AndroidProjet-ComeSerlooten_branch\AndroidProjet\app\src\main\res\mipmap-xxxhdpi\ic_launchericon.png" />
+                                                <entry key="scalingPercent" value="86" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -102,7 +92,6 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="text" value="" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -114,7 +103,6 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="text" value="" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -124,7 +112,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundAssetType" value="TEXT" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -1,12 +1,12 @@
-package com.example.androidprojet.ui.login;
+package com.example.androidprojet.ui.login.API;
 
 import java.util.List;
 
 //classe permettant de récupérer correctement les informations
 public class DictionaryAPI {
-    String word; // on prend le nom exact des variables qui sont données par l'api
-    List<Phonetics> phonetics; // on définit une classe à chaque fois que l'on a un objet différent entouré par {}
-    List<Meanings> meanings; // à chaque fois qu'on a une liste d'objets entouré par [] on met List
+    public String word; // on prend le nom exact des variables qui sont données par l'api
+    public List<Phonetics> phonetics; // on définit une classe à chaque fois que l'on a un objet différent entouré par {}
+    public List<Meanings> meanings; // à chaque fois qu'on a une liste d'objets entouré par [] on met List
 
     public DictionaryAPI(){};
 
@@ -21,8 +21,8 @@ public class DictionaryAPI {
 
 
     public class Phonetics {
-        String text;
-        String audio;
+        public String text;
+        public String audio;
 
         @Override
         public String toString() { // fonction permettant d'afficher le résultat facilement dans les logs (inutile sinon)
@@ -36,8 +36,8 @@ public class DictionaryAPI {
     }
 
     public class Meanings {
-        String partOfSpeech;
-        List<Definitions> definitions;
+        public String partOfSpeech;
+        public List<Definitions> definitions;
 
         @Override
         public String toString() { // fonction permettant d'afficher le résultat facilement dans les logs (inutile sinon)
@@ -51,9 +51,9 @@ public class DictionaryAPI {
     }
 
     public class Definitions {
-        String definition;
-        String example;
-        List<String> synonyms;
+        public String definition;
+        public String example;
+        public List<String> synonyms;
 
         @Override
         public String toString() { // fonction permettant d'afficher le résultat facilement dans les logs (inutile sinon)

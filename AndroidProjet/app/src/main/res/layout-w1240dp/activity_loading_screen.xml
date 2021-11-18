@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9EAFF">
+    android:background="#C9EAFF"
+    tools:ignore="MissingDefaultResource">
 
     <ImageView
         android:id="@+id/IconLoading"

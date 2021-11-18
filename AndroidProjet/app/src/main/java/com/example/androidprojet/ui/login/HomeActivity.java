@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.androidprojet.R;
 import com.example.androidprojet.databinding.ActivityHomeDefinitionBinding;
 import com.example.androidprojet.databinding.ActivitySynonymBinding;
+import com.example.androidprojet.ui.login.API.DictionaryAPI;
+import com.example.androidprojet.ui.login.API.DictionaryAsync;
+import com.example.androidprojet.ui.login.RecyclerView.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
             Defs= new ArrayList<>();
             Syns= new ArrayList<>();
 
-            DictionaryAsync m=new DictionaryAsync(wordDefinition.getText().toString(),this::OnDefRetrieved);
+            DictionaryAsync m=new DictionaryAsync(wordSynonym.getText().toString(),this::OnDefRetrieved);
             m.execute();
 
             RecyclerSynonyms(OutputSyn);

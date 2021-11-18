@@ -1,7 +1,6 @@
-package com.example.androidprojet.ui.login;
+package com.example.androidprojet.ui.login.API;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;

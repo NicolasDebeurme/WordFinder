@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fadingEdge="none"
     android:fadingEdgeLength="0dp"
-    tools:context=".ui.login.RegisterActivity_">
+    tools:context=".ui.App.RegisterActivity_">
 
     <ImageView
         android:id="@+id/imageView"

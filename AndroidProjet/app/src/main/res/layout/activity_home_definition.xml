@@ -57,9 +57,12 @@
                     android:id="@+id/Text_SearchBar"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
                     android:background="#FFFFFF"
+                    app:hintTextColor="#11189C"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/EnterButtonDef"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,12 +70,13 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputText_SearchBar"
-                        android:layout_width="213dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"
-                        android:hint="@null"
-                        android:text="@string/researched_word_input"
+                        android:hint="Search a word"
+                        android:singleLine="true"
                         android:textAlignment="viewStart"
+                        android:textColorHint="#11189C"
                         android:textSize="20sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,8 +84,11 @@
                     android:id="@+id/EnterButtonDef"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#4D52AF"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:backgroundTint="#11189C"
                     android:text="Enter"
+                    android:textColor="#DADADA"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -7,10 +7,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,21 +44,33 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = binding.SignInButton;
         final Button Register = binding.Register;
 
+        usernameEditText.setOnEditorActionListener(
+                (v, actionId, event) -> false
+        );
+
+        passwordEditText.setOnEditorActionListener(
+                (v, actionId, event) -> {
+                        Toast.makeText(LoginActivity.this, "Authentication",
+                                Toast.LENGTH_SHORT).show();
+                        if(passwordEditText.getText().length()>0)
+                            SignIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
+                    return false;
+                }
+        );
 
 
         loginButton.setOnClickListener(v ->
-
                 SignIn(usernameEditText.getText().toString(), passwordEditText.getText().toString())
 
         );
 
-        assert Register != null;
         Register.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity_.class);
             startActivity(intent);
         });
 
-        usernameEditText.addTextChangedListener(new TextWatcher() {
+        passwordEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -67,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                loginButton.setEnabled(0 != s.length());
+                if(s.length()!= 0 )
+                    loginButton.setEnabled(true);
             }
         });
 
@@ -88,12 +103,13 @@ public class LoginActivity extends AppCompatActivity {
 
         if (user != null) {
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
         }
     }
 
     public void SignIn(String email, String password) {
 
-        final TextView Errormessage = binding.LoginErrorFeedback;
+        final TextView Errormessage = binding.ErrorMessage;
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.SynonymActivity">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Content_Area"
@@ -58,8 +57,11 @@
                     android:id="@+id/EnterButtonSyn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:drawable/editbox_background"
                     android:backgroundTint="#11189C"
                     android:text="Enter"
+                    android:textColor="#DADADA"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +70,9 @@
                     android:id="@+id/Text_SearchBar"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
                     android:background="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,9 +85,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"
-                        android:hint="@null"
-                        android:text="@string/researched_word_input"
+                        android:hint="Search a word"
+                        android:singleLine="true"
                         android:textAlignment="viewStart"
+                        android:textColorHint="#11189C"
                         android:textSize="20sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.androidprojet.ui.login.API;
+package com.example.androidprojet.ui.App.API;
 
 import android.os.AsyncTask;
 
@@ -46,11 +46,6 @@ public class DictionaryAsync extends AsyncTask<String, Void, List<DictionaryAPI>
     protected void onPostExecute(List<DictionaryAPI> liste) {
         if(liste!=null && mListener != null){ // si on a bien reçu quelque chose
 
-            /*for(DictionaryAPI el : liste){ // on parcours les résultats
-
-                Log.d("resultat api", el.meanings.get(1).definitions.get(0).definition);  // et on les affiches
-
-            }*/
             mListener.OnDefRetrieved(liste);
         }
         super.onPostExecute(liste);

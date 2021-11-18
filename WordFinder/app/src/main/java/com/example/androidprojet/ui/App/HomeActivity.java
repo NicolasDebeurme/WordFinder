@@ -1,4 +1,4 @@
-package com.example.androidprojet.ui.login;
+package com.example.androidprojet.ui.App;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -11,9 +11,9 @@ import android.widget.EditText;
 
 import com.example.androidprojet.databinding.ActivityHomeDefinitionBinding;
 import com.example.androidprojet.databinding.ActivitySynonymBinding;
-import com.example.androidprojet.ui.login.API.DictionaryAPI;
-import com.example.androidprojet.ui.login.API.DictionaryAsync;
-import com.example.androidprojet.ui.login.RecyclerView.MyAdapter;
+import com.example.androidprojet.ui.App.API.DictionaryAPI;
+import com.example.androidprojet.ui.App.API.DictionaryAsync;
+import com.example.androidprojet.ui.App.RecyclerView.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

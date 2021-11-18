@@ -1,4 +1,4 @@
-package com.example.androidprojet.ui.login.RecyclerView;
+package com.example.androidprojet.ui.App.RecyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;

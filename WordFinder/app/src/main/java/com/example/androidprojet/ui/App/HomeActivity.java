@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.example.androidprojet.databinding.ActivitySynonymBinding;
 import com.example.androidprojet.ui.App.API.DictionaryAPI;
 import com.example.androidprojet.ui.App.API.DictionaryAsync;
 import com.example.androidprojet.ui.App.RecyclerView.MyAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
     List<String> Defs= new ArrayList<>();
     List<String> Syns = new ArrayList<>();
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ActivityHomeDefinitionBinding definitionBinding = ActivityHomeDefinitionBinding.inflate(getLayoutInflater());
         ActivitySynonymBinding synonymBinding = ActivitySynonymBinding.inflate(getLayoutInflater());
+        mAuth = FirebaseAuth.getInstance();
 
         final EditText wordDefinition = definitionBinding.InputTextSearchBar;
         final EditText wordSynonym = synonymBinding.InputTextSearchBar;
@@ -39,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
         final ConstraintLayout Definitions = synonymBinding.DefinitionsLinkTab;
         final RecyclerView OutputDef = definitionBinding.DefRecycler;
         final RecyclerView OutputSyn = synonymBinding.SynRecycler;
+        final Button DeconnectSyn =synonymBinding.Deconnect;
+        final Button DeconnectDef =definitionBinding.Deconnect;
+
         setContentView(definitionBinding.getRoot());
 
 
@@ -61,6 +68,18 @@ public class HomeActivity extends AppCompatActivity {
             m.execute();
 
             RecyclerSynonyms(OutputSyn);
+        });
+
+        DeconnectDef.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+        DeconnectSyn.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         Synonyms.setOnClickListener(v->{

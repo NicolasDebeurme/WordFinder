@@ -112,11 +112,24 @@
 
         <TextView
             android:id="@+id/versionTextBottom3"
-            android:layout_width="283dp"
+            android:layout_width="120dp"
             android:layout_height="32dp"
             android:text="@string/menu_bottomtext"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/Deconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:backgroundTint="#11189C"
+            android:text="Deconnexion"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/appLogo2"
+            app:layout_constraintStart_toEndOf="@+id/versionTextBottom3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

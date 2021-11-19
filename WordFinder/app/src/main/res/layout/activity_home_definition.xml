@@ -71,7 +71,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputText_SearchBar"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="48dp"
                         android:background="#FFFFFF"
                         android:hint="Search a word"
                         android:singleLine="true"
@@ -112,11 +112,24 @@
 
         <TextView
             android:id="@+id/versionTextBottom2"
-            android:layout_width="283dp"
+            android:layout_width="120dp"
             android:layout_height="32dp"
             android:text="@string/menu_bottomtext"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/Deconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:backgroundTint="#11189C"
+            android:text="Deconnexion"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/AppLogo"
+            app:layout_constraintStart_toEndOf="@+id/versionTextBottom2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

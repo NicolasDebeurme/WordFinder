@@ -125,7 +125,7 @@
             android:layout_marginBottom="10dp"
             android:background="@android:drawable/editbox_background"
             android:backgroundTint="#11189C"
-            android:text="Deconnexion"
+            android:text="Log Out"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/appLogo2"

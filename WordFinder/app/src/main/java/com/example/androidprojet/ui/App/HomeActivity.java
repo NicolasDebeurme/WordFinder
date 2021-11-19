@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.androidprojet.databinding.ActivityHomeDefinitionBinding;
 import com.example.androidprojet.databinding.ActivitySynonymBinding;
@@ -23,7 +24,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
 
-    List<String> Defs= new ArrayList<>();
+    List<String> Defs = new ArrayList<>();
     List<String> Syns = new ArrayList<>();
     private FirebaseAuth mAuth;
 
@@ -38,37 +39,52 @@ public class HomeActivity extends AppCompatActivity {
         final EditText wordDefinition = definitionBinding.InputTextSearchBar;
         final EditText wordSynonym = synonymBinding.InputTextSearchBar;
         final Button EnterButtonDef = definitionBinding.EnterButtonDef;
-        final Button EnterButtonSyn =synonymBinding.EnterButtonSyn;
+        final Button EnterButtonSyn = synonymBinding.EnterButtonSyn;
         final ConstraintLayout Synonyms = definitionBinding.SynonymsLinkTab;
         final ConstraintLayout Definitions = synonymBinding.DefinitionsLinkTab;
         final RecyclerView OutputDef = definitionBinding.DefRecycler;
         final RecyclerView OutputSyn = synonymBinding.SynRecycler;
-        final Button DeconnectSyn =synonymBinding.Deconnect;
-        final Button DeconnectDef =definitionBinding.Deconnect;
+        final Button DeconnectSyn = synonymBinding.Deconnect;
+        final Button DeconnectDef = definitionBinding.Deconnect;
 
         setContentView(definitionBinding.getRoot());
 
 
-
         EnterButtonDef.setOnClickListener(v -> {
-            Defs= new ArrayList<>();
-            Syns= new ArrayList<>();
+            Defs = new ArrayList<>();
+            Syns = new ArrayList<>();
 
-            DictionaryAsync m=new DictionaryAsync(wordDefinition.getText().toString(),this::OnDefRetrieved);
+            DictionaryAsync m = new DictionaryAsync(wordDefinition.getText().toString(), this::OnDefRetrieved);
             m.execute();
 
             RecyclerDefinitions(OutputDef);
         });
 
         EnterButtonSyn.setOnClickListener(v -> {
-            Defs= new ArrayList<>();
-            Syns= new ArrayList<>();
+            Defs = new ArrayList<>();
+            Syns = new ArrayList<>();
 
-            DictionaryAsync m=new DictionaryAsync(wordSynonym.getText().toString(),this::OnDefRetrieved);
+            DictionaryAsync m = new DictionaryAsync(wordSynonym.getText().toString(), this::OnDefRetrieved);
             m.execute();
 
             RecyclerSynonyms(OutputSyn);
         });
+
+        wordDefinition.setOnEditorActionListener(
+                (v, actionId, event) -> {
+                    if (wordDefinition.getText().length() > 0)
+                    {
+                        Defs = new ArrayList<>();
+                        Syns = new ArrayList<>();
+
+                        DictionaryAsync m = new DictionaryAsync(wordDefinition.getText().toString(), this::OnDefRetrieved);
+                        m.execute();
+
+                        RecyclerDefinitions(OutputDef);
+                    }
+                    return false;
+                }
+        );
 
         DeconnectDef.setOnClickListener(v -> {
             mAuth.signOut();
@@ -82,14 +98,14 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Synonyms.setOnClickListener(v->{
+        Synonyms.setOnClickListener(v -> {
             RecyclerSynonyms(OutputSyn);
 
-            wordSynonym.setText(wordDefinition.getText()) ;
+            wordSynonym.setText(wordDefinition.getText());
             setContentView(synonymBinding.getRoot());
 
         });
-        Definitions.setOnClickListener(v->{
+        Definitions.setOnClickListener(v -> {
             RecyclerDefinitions(OutputDef);
 
             wordDefinition.setText(wordSynonym.getText());
@@ -98,18 +114,16 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void OnDefRetrieved(List<DictionaryAPI> List){
+    public void OnDefRetrieved(List<DictionaryAPI> List) {
 
-        if(List!=null){ // si on a bien reçu quelque chose
+        if (List != null) { // si on a bien reçu quelque chose
 
-            for(DictionaryAPI el : List){ // on parcours les résultats
-                for (DictionaryAPI.Meanings f : el.meanings)
-                {
-                    for (DictionaryAPI.Definitions i : f.definitions)
-                    {
-                        Defs.add( " ("+f.partOfSpeech+") "+ i.definition+ "\n");
-                        for(String j : i.synonyms)
-                            Syns.add(j+ "\n");
+            for (DictionaryAPI el : List) { // on parcours les résultats
+                for (DictionaryAPI.Meanings f : el.meanings) {
+                    for (DictionaryAPI.Definitions i : f.definitions) {
+                        Defs.add(" (" + f.partOfSpeech + ") " + i.definition + "\n");
+                        for (String j : i.synonyms)
+                            Syns.add(j + "\n");
                     }
                 }
 
@@ -117,14 +131,13 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void RecyclerSynonyms(RecyclerView SynRec)
-    {
+    private void RecyclerSynonyms(RecyclerView SynRec) {
         MyAdapter myAdapter = new MyAdapter(this, Syns);
         SynRec.setAdapter(myAdapter);
         SynRec.setLayoutManager(new LinearLayoutManager(this));
     }
-    private void RecyclerDefinitions(RecyclerView DefRec)
-    {
+
+    private void RecyclerDefinitions(RecyclerView DefRec) {
         MyAdapter myAdapter = new MyAdapter(this, Defs);
         DefRec.setAdapter(myAdapter);
         DefRec.setLayoutManager(new LinearLayoutManager(this));

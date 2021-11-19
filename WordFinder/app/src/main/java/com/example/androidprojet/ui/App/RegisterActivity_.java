@@ -43,16 +43,14 @@ public class RegisterActivity_ extends LoginActivity {
         );
         password.setOnEditorActionListener(
                 (v, actionId, event) -> {
-                        if(password.length() != 0)
-                            Register(email.getText().toString(), password.getText().toString(),ErrorMessage);
+                    if (password.length() != 0)
+                        Register(email.getText().toString(), password.getText().toString(), ErrorMessage);
                     return false;
                 }
         );
 
         RegisterButton.setOnClickListener(v -> {
-                    if (!email.getText().toString().equals("") && !password.getText().toString().equals(""))
-                        Register(email.getText().toString(), password.getText().toString(),ErrorMessage);
-
+                    Register(email.getText().toString(), password.getText().toString(), ErrorMessage);
                 }
         );
     }
@@ -66,28 +64,32 @@ public class RegisterActivity_ extends LoginActivity {
     }
 
     public void Register(String email, String password, TextView ErrorMessage) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    private static final String TAG = "register";
+        if (email.length() > 0 && password.length() > 0) {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        private static final String TAG = "register";
 
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUiWithUser(user);
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUiWithUser(user);
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity_.this, "Login ou Mot De Passe incorrect",
-                                    Toast.LENGTH_SHORT).show();
-                            ErrorMessage.setVisibility(View.VISIBLE);
-                            updateUiWithUser(null);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity_.this, "Login ou Mot De Passe incorrect",
+                                        Toast.LENGTH_SHORT).show();
+                                ErrorMessage.setVisibility(View.VISIBLE);
+                                updateUiWithUser(null);
+                            }
                         }
-                    }
-                });
+                    });
+        } else
+            ErrorMessage.setVisibility(View.VISIBLE);
+
     }
 
 
